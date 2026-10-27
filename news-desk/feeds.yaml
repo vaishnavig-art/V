@@ -1,0 +1,201 @@
+# News sources the desk watches.
+# Each source has: name (the outlet), section, url (its RSS feed).
+# Sections: National, International, Business, Tech, Lifestyle, Entertainment, Telangana & Hyd, Top
+# "Top" feeds have no fixed section; their stories are sorted by keywords.
+# To add a source: copy any 3-line block below, change the values, save.
+# To remove one: delete its 3 lines, or put # in front of them.
+
+sources:
+  # ---------- Google News (shows which outlets carry each story) ----------
+  - name: Google News
+    section: Top
+    url: https://news.google.com/rss?hl=en-IN&gl=IN&ceid=IN:en
+  - name: Google News
+    section: National
+    url: https://news.google.com/rss/headlines/section/topic/NATION?hl=en-IN&gl=IN&ceid=IN:en
+  - name: Google News
+    section: International
+    url: https://news.google.com/rss/headlines/section/topic/WORLD?hl=en-IN&gl=IN&ceid=IN:en
+  - name: Google News
+    section: Business
+    url: https://news.google.com/rss/headlines/section/topic/BUSINESS?hl=en-IN&gl=IN&ceid=IN:en
+  - name: Google News
+    section: Tech
+    url: https://news.google.com/rss/headlines/section/topic/TECHNOLOGY?hl=en-IN&gl=IN&ceid=IN:en
+  - name: Google News
+    section: Entertainment
+    url: https://news.google.com/rss/headlines/section/topic/ENTERTAINMENT?hl=en-IN&gl=IN&ceid=IN:en
+  - name: Google News
+    section: Lifestyle
+    url: https://news.google.com/rss/headlines/section/topic/HEALTH?hl=en-IN&gl=IN&ceid=IN:en
+  - name: Google News
+    section: Telangana & Hyd
+    url: https://news.google.com/rss/search?q=Telangana+OR+Hyderabad+when:1d&hl=en-IN&gl=IN&ceid=IN:en
+  - name: Google News Telugu
+    section: Telangana & Hyd
+    url: https://news.google.com/rss/search?q=%E0%B0%A4%E0%B1%86%E0%B0%B2%E0%B0%82%E0%B0%97%E0%B0%BE%E0%B0%A3+when:1d&hl=te&gl=IN&ceid=IN:te
+  - name: Google News Telugu
+    section: Top
+    url: https://news.google.com/rss?hl=te&gl=IN&ceid=IN:te
+
+  # ---------- Times of India ----------
+  - name: Times of India
+    section: Top
+    url: https://timesofindia.indiatimes.com/rssfeedstopstories.cms
+  - name: Times of India
+    section: National
+    url: https://timesofindia.indiatimes.com/rssfeeds/-2128936835.cms
+  - name: Times of India
+    section: International
+    url: https://timesofindia.indiatimes.com/rssfeeds/296589292.cms
+  - name: Times of India
+    section: Business
+    url: https://timesofindia.indiatimes.com/rssfeeds/1898055.cms
+  - name: Times of India
+    section: Tech
+    url: https://timesofindia.indiatimes.com/rssfeeds/66949542.cms
+  - name: Times of India
+    section: Entertainment
+    url: https://timesofindia.indiatimes.com/rssfeeds/1081479906.cms
+  - name: Times of India
+    section: Lifestyle
+    url: https://timesofindia.indiatimes.com/rssfeeds/2886704.cms
+  - name: Times of India
+    section: Telangana & Hyd
+    url: https://timesofindia.indiatimes.com/rssfeeds/-2128816011.cms
+
+  # ---------- Economic Times ----------
+  - name: Economic Times
+    section: Business
+    url: https://economictimes.indiatimes.com/rssfeedstopstories.cms
+  - name: Economic Times
+    section: Business
+    url: https://economictimes.indiatimes.com/markets/rssfeeds/1977021501.cms
+  - name: Economic Times
+    section: Tech
+    url: https://economictimes.indiatimes.com/tech/rssfeeds/13357270.cms
+
+  # ---------- NDTV ----------
+  - name: NDTV
+    section: Top
+    url: https://feeds.feedburner.com/ndtvnews-top-stories
+  - name: NDTV
+    section: National
+    url: https://feeds.feedburner.com/ndtvnews-india-news
+  - name: NDTV
+    section: International
+    url: https://feeds.feedburner.com/ndtvnews-world-news
+  - name: NDTV
+    section: Business
+    url: https://feeds.feedburner.com/ndtvprofit-latest
+  - name: NDTV
+    section: Tech
+    url: https://feeds.feedburner.com/gadgets360-latest
+  - name: NDTV
+    section: Entertainment
+    url: https://feeds.feedburner.com/ndtvmovies-latest
+
+  # ---------- The Hindu ----------
+  - name: The Hindu
+    section: National
+    url: https://www.thehindu.com/news/national/feeder/default.rss
+  - name: The Hindu
+    section: International
+    url: https://www.thehindu.com/news/international/feeder/default.rss
+  - name: The Hindu
+    section: Business
+    url: https://www.thehindu.com/business/feeder/default.rss
+  - name: The Hindu
+    section: Tech
+    url: https://www.thehindu.com/sci-tech/technology/feeder/default.rss
+  - name: The Hindu
+    section: Entertainment
+    url: https://www.thehindu.com/entertainment/feeder/default.rss
+  - name: The Hindu
+    section: Lifestyle
+    url: https://www.thehindu.com/life-and-style/feeder/default.rss
+  - name: The Hindu
+    section: Telangana & Hyd
+    url: https://www.thehindu.com/news/national/telangana/feeder/default.rss
+  - name: The Hindu
+    section: Telangana & Hyd
+    url: https://www.thehindu.com/news/cities/Hyderabad/feeder/default.rss
+
+  # ---------- Indian Express ----------
+  - name: Indian Express
+    section: National
+    url: https://indianexpress.com/section/india/feed/
+  - name: Indian Express
+    section: International
+    url: https://indianexpress.com/section/world/feed/
+  - name: Indian Express
+    section: Business
+    url: https://indianexpress.com/section/business/feed/
+  - name: Indian Express
+    section: Tech
+    url: https://indianexpress.com/section/technology/feed/
+  - name: Indian Express
+    section: Entertainment
+    url: https://indianexpress.com/section/entertainment/feed/
+  - name: Indian Express
+    section: Lifestyle
+    url: https://indianexpress.com/section/lifestyle/feed/
+  - name: Indian Express
+    section: Telangana & Hyd
+    url: https://indianexpress.com/section/cities/hyderabad/feed/
+
+  # ---------- Hindustan Times ----------
+  - name: Hindustan Times
+    section: National
+    url: https://www.hindustantimes.com/feeds/rss/india-news/rssfeed.xml
+  - name: Hindustan Times
+    section: International
+    url: https://www.hindustantimes.com/feeds/rss/world-news/rssfeed.xml
+  - name: Hindustan Times
+    section: Business
+    url: https://www.hindustantimes.com/feeds/rss/business/rssfeed.xml
+  - name: Hindustan Times
+    section: Entertainment
+    url: https://www.hindustantimes.com/feeds/rss/entertainment/rssfeed.xml
+
+  # ---------- International ----------
+  - name: BBC News
+    section: International
+    url: https://feeds.bbci.co.uk/news/world/rss.xml
+  - name: Al Jazeera
+    section: International
+    url: https://www.aljazeera.com/xml/rss/all.xml
+
+  # ---------- Telangana & Hyderabad ----------
+  - name: Telangana Today
+    section: Telangana & Hyd
+    url: https://telanganatoday.com/feed
+  - name: Siasat
+    section: Telangana & Hyd
+    url: https://www.siasat.com/feed/
+
+# Google Trends: what people in India are searching for right now
+trends_url: https://trends.google.com/trending/rss?geo=IN
+
+# Words that put a story in "Telangana & Hyd" whatever feed it came from
+telangana_keywords:
+  - telangana
+  - hyderabad
+  - secunderabad
+  - cyberabad
+  - ghmc
+  - hydraa
+  - revanth
+  - ktr
+  - kcr
+  - harish rao
+  - brs
+  - kaleshwaram
+  - warangal
+  - karimnagar
+  - nizamabad
+  - khammam
+  - gachibowli
+  - hitec city
+  - తెలంగాణ
+  - హైదరాబాద్

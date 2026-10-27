@@ -1,0 +1,310 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>V6 & Velugu News Desk</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📰</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..100,400..800&family=Noto+Sans+Telugu:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F4F6F9; --surface:#FFFFFF; --ink:#13233A; --muted:#5E6C80; --line:#D5DCE5;
+  --hot:#D6243A; --on-hot:#FFFFFF; --rise:#B87A00; --ok:#1F7A4D; --chip:#E8EDF3;
+  --sans:"Archivo", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --telugu:"Noto Sans Telugu", "Nirmala UI", "Gautami", sans-serif;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --paper:#0E1621; --surface:#152131; --ink:#E9EEF5; --muted:#93A1B5; --line:#26364A;
+    --hot:#E5364B; --on-hot:#FFFFFF; --rise:#F5B83D; --ok:#4CC38A; --chip:#1E2C3F;
+    color-scheme: dark;
+  }
+}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.45;
+  padding:env(safe-area-inset-top,0px) 0 env(safe-area-inset-bottom,0px)}
+a{color:inherit}
+a:focus-visible,button:focus-visible,input:focus-visible,summary:focus-visible{outline:2px solid var(--hot);outline-offset:2px}
+.wrap{max-width:1240px;margin:0 auto;padding:20px clamp(14px,3vw,32px) 48px}
+
+/* masthead */
+.mast{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:8px 24px;border-bottom:2px solid var(--ink);padding-bottom:10px}
+.mast h1{margin:0;font-weight:800;font-stretch:80%;font-size:clamp(1.5rem,3.2vw,2.1rem);letter-spacing:-.01em}
+.status{display:flex;flex-wrap:wrap;align-items:center;gap:6px 16px;font-size:.875rem;color:var(--muted)}
+.live{display:inline-flex;align-items:center;gap:7px;color:var(--ink);font-weight:600}
+.live::before{content:"";width:9px;height:9px;border-radius:50%;background:var(--ok)}
+.live.stale::before{background:var(--rise)}
+.live.down::before{background:var(--hot)}
+.status details{position:relative}
+.status summary{cursor:pointer;list-style:none;text-decoration:underline dotted;text-underline-offset:3px}
+.status summary::-webkit-details-marker{display:none}
+.failed{position:absolute;right:0;top:1.8em;z-index:5;width:min(320px,80vw);background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:10px 12px;box-shadow:0 8px 24px rgba(0,0,0,.18);font-size:.8125rem;color:var(--ink)}
+.failed ul{margin:6px 0 0;padding-left:18px}
+
+/* lead story: the one loud element, a broadcast lower-third */
+.lead{display:grid;grid-template-columns:auto 1fr;margin:22px 0 18px;min-height:120px}
+.lead .count{background:var(--hot);color:var(--on-hot);display:flex;flex-direction:column;justify-content:center;align-items:center;padding:12px clamp(14px,2.4vw,26px);min-width:96px}
+.lead .count b{font-size:clamp(2.2rem,5vw,3.4rem);font-weight:800;font-stretch:75%;line-height:1;font-variant-numeric:tabular-nums}
+.lead .count span{font-size:.8125rem;opacity:.9}
+.lead .body{background:var(--surface);border:1px solid var(--line);border-left:0;padding:14px clamp(14px,2.4vw,24px);display:flex;flex-direction:column;justify-content:center;gap:4px;min-width:0}
+.lead .tag{font-size:.8125rem;color:var(--muted)}
+.lead h2{margin:0;font-size:clamp(1.25rem,2.8vw,1.95rem);font-weight:750;font-stretch:82%;line-height:1.15;text-wrap:balance}
+.lead h2 a{text-decoration:none}
+.lead h2 a:hover{text-decoration:underline}
+.lead .te{font-family:var(--telugu);font-size:clamp(1rem,2vw,1.2rem);font-weight:600}
+
+/* controls */
+.controls{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;margin-bottom:6px}
+.tabs{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;max-width:100%}
+.tabs::-webkit-scrollbar{display:none}
+.tab{font:inherit;font-size:.9rem;font-weight:600;white-space:nowrap;background:none;border:0;border-bottom:3px solid transparent;color:var(--muted);padding:8px 10px;cursor:pointer}
+.tab[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--hot)}
+.tab small{font-weight:400;margin-left:4px;font-variant-numeric:tabular-nums}
+.tools{display:flex;gap:10px;align-items:center;flex:1 1 260px;justify-content:flex-end}
+.tools input[type=search]{font:inherit;font-size:.9rem;flex:1 1 180px;max-width:280px;min-width:0;padding:7px 10px;border:1px solid var(--line);border-radius:6px;background:var(--surface);color:var(--ink)}
+.tools label{display:inline-flex;align-items:center;gap:6px;font-size:.875rem;white-space:nowrap;cursor:pointer}
+
+/* layout */
+.grid{display:grid;grid-template-columns:minmax(0,1fr);gap:28px}
+@media (min-width:1000px){.grid{grid-template-columns:minmax(0,1fr) 300px}}
+
+/* story rows */
+.list{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+.row{display:grid;grid-template-columns:64px minmax(0,1fr);gap:14px;padding:14px 0;border-bottom:1px solid var(--line)}
+.meter{display:flex;flex-direction:column;align-items:flex-start;gap:5px;padding-top:4px}
+.bars{display:flex;gap:3px}
+.bars i{width:9px;height:14px;border-radius:2px;background:var(--line)}
+.bars i.on{background:var(--hot)}
+.meter b{font-size:1.15rem;font-weight:750;font-stretch:80%;font-variant-numeric:tabular-nums;line-height:1}
+.meter span{font-size:.75rem;color:var(--muted);line-height:1.1}
+.row h3{margin:0 0 2px;font-size:1.06rem;font-weight:650;line-height:1.3;max-width:72ch}
+.row h3 a{text-decoration:none}
+.row h3 a:hover{text-decoration:underline}
+.row .te{margin:0 0 6px;font-family:var(--telugu);font-size:1rem}
+.info{display:flex;flex-wrap:wrap;gap:6px 10px;align-items:center;font-size:.8125rem;color:var(--muted)}
+.badge{font-weight:700;font-size:.75rem;padding:1px 7px;border-radius:4px}
+.badge.rise{color:var(--rise);border:1px solid currentColor}
+.badge.single{color:var(--muted);border:1px dashed currentColor}
+.outlets{display:flex;flex-wrap:wrap;gap:4px;margin-top:6px}
+.outlets a{font-size:.78rem;text-decoration:none;background:var(--chip);padding:2px 8px;border-radius:999px;color:var(--ink)}
+.outlets a:hover{text-decoration:underline}
+.more{font:inherit;font-size:.9rem;font-weight:600;margin:16px 0 0;padding:8px 14px;border:1px solid var(--line);border-radius:6px;background:var(--surface);color:var(--ink);cursor:pointer}
+.empty{padding:28px 0;color:var(--muted)}
+
+/* side column */
+aside h2{font-size:1rem;font-weight:750;font-stretch:85%;margin:0 0 8px;padding-bottom:6px;border-bottom:2px solid var(--ink)}
+.trends{list-style:none;margin:0 0 26px;padding:0}
+.trends li{display:flex;justify-content:space-between;gap:10px;padding:7px 0;border-bottom:1px solid var(--line);font-size:.9rem}
+.trends a{text-decoration:none;font-weight:600}
+.trends a:hover{text-decoration:underline}
+.trends span{color:var(--muted);font-size:.8rem;white-space:nowrap;font-variant-numeric:tabular-nums}
+.note{font-size:.84rem;color:var(--muted)}
+.note p{margin:0 0 10px}
+.note b{color:var(--ink)}
+.notice{margin:16px 0;padding:12px 14px;border:1px solid var(--line);border-left:4px solid var(--rise);background:var(--surface);border-radius:4px;font-size:.92rem}
+@media (max-width:520px){.lead{grid-template-columns:1fr}.lead .count{flex-direction:row;gap:10px;justify-content:flex-start}.lead .body{border-left:1px solid var(--line);border-top:0}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="mast">
+    <h1>V6 &amp; Velugu News Desk</h1>
+    <div class="status" id="status"><span class="live" id="live">Loading…</span></div>
+  </header>
+
+  <div id="notice"></div>
+  <section class="lead" id="lead" aria-label="Top story" hidden></section>
+
+  <div class="controls">
+    <div class="tabs" role="tablist" id="tabs"></div>
+    <div class="tools">
+      <input type="search" id="q" placeholder="Search headlines or outlets" aria-label="Search headlines or outlets">
+      <label><input type="checkbox" id="risingOnly"> Rising only</label>
+    </div>
+  </div>
+
+  <div class="grid">
+    <main>
+      <ul class="list" id="list"></ul>
+      <button class="more" id="more" hidden>Show more stories</button>
+    </main>
+    <aside>
+      <h2>Trending searches in India</h2>
+      <ul class="trends" id="trends"><li><span>Loading…</span></li></ul>
+      <h2>How to read this</h2>
+      <div class="note">
+        <p><b>Outlets</b> is how many different news sites are carrying the same story. More outlets means the story is spreading.</p>
+        <p><b>Rising</b> marks a story first seen in the last 3 hours that 3 or more outlets already have.</p>
+        <p><b>Single source</b> means only one outlet has it so far. Verify before airing.</p>
+        <p>Telugu lines are AI drafts for the desk to correct. This page refreshes itself every few minutes.</p>
+      </div>
+    </aside>
+  </div>
+</div>
+
+<script>
+const SECTIONS = ["All","National","International","Business","Tech","Lifestyle","Entertainment","Telangana & Hyd"];
+const PAGE = 30;
+const state = { data:null, section:"All", q:"", rising:false, shown:PAGE, error:null };
+const $ = (id) => document.getElementById(id);
+const el = (tag, cls, text) => { const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; };
+
+function ago(iso){
+  const m = Math.max(0, Math.round((Date.now() - new Date(iso).getTime()) / 60000));
+  if (m < 1) return "just now";
+  if (m < 60) return m + " min ago";
+  const h = Math.floor(m / 60);
+  if (h < 24) return h + (h === 1 ? " hour ago" : " hours ago");
+  const d = Math.floor(h / 24); return d + (d === 1 ? " day ago" : " days ago");
+}
+
+// open the section named in the link, e.g. ...#telangana
+const slug = (s) => s.toLowerCase().replace(/&/g,"").replace(/\s+/g,"-").replace(/-+/g,"-");
+const fromHash = SECTIONS.find(s => slug(s) === location.hash.slice(1));
+if (fromHash) state.section = fromHash;
+
+async function load(){
+  try {
+    const r = await fetch("data/news.json?t=" + Date.now(), { cache: "no-store" });
+    if (!r.ok) throw new Error("HTTP " + r.status);
+    state.data = await r.json(); state.error = null;
+  } catch (e) { state.error = e; }
+  render();
+}
+
+function filtered(){
+  const d = state.data; if (!d) return [];
+  const q = state.q.toLowerCase();
+  return d.stories.filter(s =>
+    (state.section === "All" || s.section === state.section) &&
+    (!state.rising || s.rising) &&
+    (!q || (s.headline + " " + (s.telugu || "") + " " + s.outlets.map(o => o.name).join(" ")).toLowerCase().includes(q))
+  );
+}
+
+function renderStatus(){
+  const live = $("live"), st = $("status");
+  st.querySelectorAll(".extra").forEach(n => n.remove());
+  const d = state.data;
+  if (!d){ live.className = "live down"; live.textContent = state.error ? "Can’t load news" : "Loading…"; return; }
+  const mins = (Date.now() - new Date(d.updated_at).getTime()) / 60000;
+  live.className = "live" + (mins > 90 ? " down" : mins > 45 ? " stale" : "");
+  live.textContent = d.updated_at ? "Updated " + ago(d.updated_at) : "Waiting for first update";
+  if (!d.sources) return;
+  const s = el("span","extra", (d.headlines_read || 0).toLocaleString("en-IN") + " headlines read");
+  st.append(s);
+  const det = el("details","extra");
+  const sum = el("summary", null, d.sources.ok + " of " + d.sources.total + " sources working");
+  det.append(sum);
+  const box = el("div","failed");
+  if (d.sources.failed.length){
+    box.append(el("div", null, "Not responding on the last run:"));
+    const ul = el("ul");
+    d.sources.failed.forEach(f => ul.append(el("li", null, f.name + " (" + f.section + ")")));
+    box.append(ul);
+  } else box.append(el("div", null, "Every source answered on the last run."));
+  det.append(box); st.append(det);
+}
+
+function renderNotice(){
+  const n = $("notice"); n.replaceChildren();
+  const d = state.data;
+  let msg = null;
+  if (state.error && !d) msg = "The news file didn’t load. If you just set this up, open the Actions tab on GitHub and run “Update news” once.";
+  else if (d && !d.stories.length) msg = "No stories yet. The first automatic update runs within 15 minutes, or run “Update news” from the Actions tab on GitHub now.";
+  else if (d && (Date.now() - new Date(d.updated_at).getTime()) > 90 * 60000) msg = "News hasn’t updated for over 90 minutes. Check the Actions tab on GitHub for a failed run.";
+  if (msg) n.append(el("div","notice",msg));
+}
+
+function renderTabs(){
+  const t = $("tabs"); t.replaceChildren();
+  const stories = state.data ? state.data.stories : [];
+  for (const s of SECTIONS){
+    const b = el("button","tab", s);
+    b.setAttribute("role","tab");
+    b.setAttribute("aria-selected", String(s === state.section));
+    const n = s === "All" ? stories.length : stories.filter(x => x.section === s).length;
+    if (state.data) b.append(el("small", null, String(n)));
+    b.onclick = () => { state.section = s; state.shown = PAGE; history.replaceState(null, "", s === "All" ? location.pathname : "#" + slug(s)); render(); };
+    t.append(b);
+  }
+}
+
+function outletsLine(s){
+  const w = el("div","outlets");
+  s.outlets.forEach(o => { const a = el("a", null, o.name); a.href = o.link; a.target = "_blank"; a.rel = "noopener"; w.append(a); });
+  if (s.outlet_count > s.outlets.length) w.append(el("span","note", "+" + (s.outlet_count - s.outlets.length) + " more"));
+  return w;
+}
+
+function renderLead(rows){
+  const lead = $("lead"); lead.replaceChildren();
+  const s = rows[0];
+  if (!s){ lead.hidden = true; return; }
+  lead.hidden = false;
+  const c = el("div","count"); c.append(el("b", null, String(s.outlet_count)), el("span", null, s.outlet_count === 1 ? "outlet" : "outlets"));
+  const b = el("div","body");
+  b.append(el("div","tag", (state.section === "All" ? "Top story · " + s.section : "Top in " + s.section) + " · first seen " + ago(s.first_seen)));
+  const h = el("h2"); const a = el("a", null, s.headline); a.href = s.link; a.target = "_blank"; a.rel = "noopener"; h.append(a); b.append(h);
+  if (s.telugu) b.append(el("div","te", s.telugu));
+  lead.append(c, b);
+}
+
+function renderList(rows){
+  const list = $("list"); list.replaceChildren();
+  const rest = rows.slice(1, state.shown + 1);
+  if (!rows.length){
+    list.append(el("li","empty", state.data ? "No stories match. Try another section or clear the search." : ""));
+    $("more").hidden = true; return;
+  }
+  for (const s of rest){
+    const li = el("li","row");
+    const m = el("div","meter");
+    const bars = el("div","bars"); bars.setAttribute("aria-label", "Buzz " + s.buzz + " of 5");
+    for (let i = 1; i <= 5; i++) bars.append(el("i", i <= s.buzz ? "on" : ""));
+    m.append(bars, el("b", null, String(s.outlet_count)), el("span", null, s.outlet_count === 1 ? "outlet" : "outlets"));
+    const body = el("div");
+    const h = el("h3"); const a = el("a", null, s.headline); a.href = s.link; a.target = "_blank"; a.rel = "noopener"; h.append(a);
+    body.append(h);
+    if (s.telugu) body.append(el("p","te", s.telugu));
+    const info = el("div","info");
+    if (state.section === "All") info.append(el("span", null, s.section));
+    info.append(el("span", null, "First seen " + ago(s.first_seen)));
+    if (s.rising) info.append(el("span","badge rise","Rising"));
+    if (s.outlet_count < 2) info.append(el("span","badge single","Single source"));
+    body.append(info, outletsLine(s));
+    li.append(m, body); list.append(li);
+  }
+  $("more").hidden = rows.length <= state.shown + 1;
+}
+
+function renderTrends(){
+  const ul = $("trends"); ul.replaceChildren();
+  const t = state.data && state.data.trends || [];
+  if (!t.length){ ul.append(el("li", null, state.data ? "Google Trends didn’t answer on the last run." : "Loading…")); return; }
+  t.slice(0, 15).forEach(x => {
+    const li = el("li"); const a = el("a", null, x.title); a.href = x.link; a.target = "_blank"; a.rel = "noopener";
+    li.append(a); if (x.traffic) li.append(el("span", null, x.traffic + " searches")); ul.append(li);
+  });
+}
+
+function render(){
+  renderStatus(); renderNotice(); renderTabs();
+  const rows = filtered();
+  renderLead(rows); renderList(rows); renderTrends();
+}
+
+$("q").addEventListener("input", e => { state.q = e.target.value.trim(); state.shown = PAGE; render(); });
+$("risingOnly").addEventListener("change", e => { state.rising = e.target.checked; state.shown = PAGE; render(); });
+$("more").addEventListener("click", () => { state.shown += PAGE; render(); });
+
+load();
+setInterval(load, 5 * 60 * 1000);   // fetch fresh news every 5 minutes
+setInterval(renderStatus, 30 * 1000); // keep "updated x min ago" accurate
+</script>
+</body>
+</html>
